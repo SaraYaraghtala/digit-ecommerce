@@ -2,7 +2,7 @@ import React from 'react';
 
 const Logo = () => {
     return (
-        <div className="flex items-center justify-center w-1/6 h-16">
+        <div className="flex items-center justify-center w-1/6 h-12 ">
       <svg xmlns="http://www.w3.org/2000/svg" width="115" height="30" viewBox="0 0 115 30">
     <g fill="none" fill-rule="evenodd">
         <g fill="#EE384E">

@@ -4,15 +4,13 @@ import Search from "./Search";
 import Login from "./Login";
 import Logo from "./logo";
 
-
 const SearchBar = () => {
   return (
-    <div className="flex">
-      <Card />
-      <Login />
-      <Search />
+    <div className="flex bg-pink-50 py-4">
       <Logo />
-      
+      <Search />
+      <Login />
+      <Card />
     </div>
   );
 };
