@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import SearchBar from "./Components/SearchBar";
+import Menu from "./Components/Menu"
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
   return (
     <>
       <SearchBar />
+      < Menu />
     </>
   );
 }

@@ -6,7 +6,7 @@ import Logo from "./logo";
 
 const SearchBar = () => {
   return (
-    <div className="flex bg-pink-50 py-4">
+    <div className="flex bg-pink-50 py-4 ">
       <Logo />
       <Search />
       <Login />
