@@ -1,0 +1,22 @@
+[
+    {
+        "category":"Living",
+        "subcategory":["Living1","Living2","Living3","Living4","Living5","Living6"]
+    },
+    {
+        "category":"Garden",
+        "subcategory":["Garden1","Garden2","Garden3","Garden4","Garden5","Garden6"]
+    },
+    {
+        "category":"Smart Home",
+        "subcategory":["Smart Home1","Smart Home2","Smart Home3","Smart Home4","Smart Home5","Smart Home6"]
+    },
+    {
+        "category":"Kitchen",
+        "subcategory":["Kitchen1","Kitchen2","Kitchen3","Kitchen4","Kitchen5","Kitchen6"]
+    }
+
+
+
+
+]

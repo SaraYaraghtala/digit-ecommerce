@@ -1,26 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MegaIcon from "../../assets/megamenu.svg";
+import Bestseller from "../../assets/bestseller.svg";
+import MegaMenuItem from "./MegaMenuItem";
+
 
 const MegaMenu = () => {
+  const [menuData,setMenudata]= useState([])
+  const getData =() =>{   
+    fetch("./FakeData/MegaMenu.json")
+    .then(response => response.json())
+    .then(data =>setMenudata(data))
+    }
+    
+  useEffect(
+    ()=>{getData()},
+    []
+  )
   return (
-    <div className="dropdown dropdown-hover dropdown-bottom dropdown-end float-left">
-    <div className='flex h-8 pl-[70px]'>
-      <a className='hover:border-l-red-400 items-center hover:border-l hover:border-l-solid flex px-1' href="#">
-        <img className='h-[70%] mr-2' src={MegaIcon} alt="" />
-        ALL
-      </a>
-    </div>
-    <div className="dropdown-content w-[920%] h-96 bg-[#eee] left-[70px]">
-    <ul className="p-4">
-          <li className="py-2">Dropdown Item 1</li>
-          <li className="py-2">Dropdown Item 2</li>
-          <li className="py-2">Dropdown Item 3</li>
-          <li className="py-2">Dropdown Item 4</li>
+    <div className="dropdown dropdown-hover dropdown-bottom dropdown-end">
+      <div className="flex h-8 pl-[70px]">
+        <a 
+          className="hover:border-l-red-400 items-center hover:border-l hover:border-l-solid flex px-1"
+          href="#"
+        >
+          <img className="h-[70%] mr-2" src={MegaIcon} alt="" />
+          ALL
+        </a>
+      </div>
+      <div className="dropdown-content w-[920%] h-96 bg-[#eee] left-[70px]">
+        <ul className="p-4">
+         {
+          menuData&& menuData.map(
+            (item)=>{
+              return (
+                <MegaMenuItem subcategory= {item.subcategory}>
+                  <img className="h-[100%]" src={Bestseller} alt="seller" />
+                    {item.category}
+                </MegaMenuItem>
+              )
+            }
+          )
+         }
+          
+          
+          
         </ul>
-     
+      </div>
     </div>
-  </div>
-
   );
 };
 
