@@ -4,6 +4,7 @@ import SearchBar from "./Components/SearchBar";
 import Menu from "./Components/Menu"
 import Carousel from "./Components/Carousel";
 import { Baner1 } from "./Components/Baners";
+import ProductCarousel from "./Components/Products/ProductCarousel";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Carousel />
       <div className="px-[5%]">
         < Baner1 />
+        < ProductCarousel />
         </div>
    
     </>
