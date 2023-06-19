@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import MegaIcon from "../../assets/megamenu.svg";
-import Bestseller from "../../assets/bestseller.svg";
 import MegaMenuItem from "./MegaMenuItem";
 
 
@@ -27,14 +26,14 @@ const MegaMenu = () => {
           ALL
         </a>
       </div>
-      <div className="dropdown-content w-[920%] h-96 bg-[#eee] left-[70px]">
+      <div className="dropdown-content w-[920%] h-96 bg-[#eee] left-[70px] z-50 opacity-50">
         <ul className="p-4">
          {
           menuData&& menuData.map(
             (item)=>{
               return (
-                <MegaMenuItem subcategory= {item.subcategory}>
-                  <img className="h-[100%]" src={Bestseller} alt="seller" />
+                <MegaMenuItem subcategory= {item.subcategory}  category={item.category}  icon={item.icon} key={item.category}>
+                  <img className="h-[100%]" src={item.icon} alt="card" />
                     {item.category}
                 </MegaMenuItem>
               )

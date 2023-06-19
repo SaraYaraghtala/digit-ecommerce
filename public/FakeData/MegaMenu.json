@@ -1,22 +1,56 @@
 [
     {
-        "category":"Living",
-        "subcategory":["Living1","Living2","Living3","Living4","Living5","Living6"]
+      "category": "Living",
+      "subcategory": [
+        {
+          "name": "Living1",
+          "subsubcategories": ["Living1-1", "Living1-2", "Living1-3"]
+        },
+        {
+          "name": "Living2",
+          "subsubcategories": ["Living2-1", "Living2-2", "Living2-3"]
+        },
+        {
+          "name": "Living3",
+          "subsubcategories": ["Living3-1", "Living3-2", "Living3-3"]
+        }
+      ],
+      "icon": "./images/icon/card.svg"
     },
     {
-        "category":"Garden",
-        "subcategory":["Garden1","Garden2","Garden3","Garden4","Garden5","Garden6"]
+      "category": "Garden",
+      "subcategory": [
+        {
+          "name": "Garden1",
+          "subsubcategories": ["Garden1-1", "Garden1-2", "Garden1-3"]
+        },
+        {
+          "name": "Garden2",
+          "subsubcategories": ["Garden2-1", "Garden2-2", "Garden2-3"]
+        },
+        {
+          "name": "Garden3",
+          "subsubcategories": ["Garden3-1", "Garden3-2", "Garden3-3"]
+        }
+      ],
+      "icon": "./images/icon/location.svg"
     },
     {
-        "category":"Smart Home",
-        "subcategory":["Smart Home1","Smart Home2","Smart Home3","Smart Home4","Smart Home5","Smart Home6"]
-    },
-    {
-        "category":"Kitchen",
-        "subcategory":["Kitchen1","Kitchen2","Kitchen3","Kitchen4","Kitchen5","Kitchen6"]
-    }
-
-
-
-
-]
+        "category": "Smart phone",
+        "subcategory": [
+          {
+            "name": "Smart phone1",
+            "subsubcategories": ["Smart phone1-1", "Smart phone1-2", "Smart phone1-3"]
+          },
+          {
+            "name": "Smart phone2",
+            "subsubcategories": ["Smart phone2-1", "Smart phone2-2", "Smart phone2-3"]
+          },
+          {
+            "name": "Smart phone3",
+            "subsubcategories": ["Smart phone3-1", "Smart phone3-2", "Smart phone3-3"]
+          }
+        ],
+        "icon": "./images/icon/card.svg"
+      }
+  ]

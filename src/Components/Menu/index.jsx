@@ -5,7 +5,7 @@ import Location from './Location';
 
 const Menu = () => {
     return (
-        <div className='flex mt-3'>
+        <div className='flex mt-3 shadow-md shadow-zinc-400 py-2 z-50'>
             < MegaMenu />
             < TopManu />
             < Location />
