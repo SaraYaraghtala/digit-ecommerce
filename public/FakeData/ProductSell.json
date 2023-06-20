@@ -5,7 +5,7 @@
         "title":"product 1",
         "oldprice":200,
         "price":222,
-        "image":"./images/product/product.jpg"
+        "image":"./images/product/product2.png"
     },
     {
         "id":2,
@@ -21,7 +21,7 @@
         "title":"product 1",
         "oldprice":200,
         "price":222,
-        "image":"./images/product/product.jpg"
+        "image":"./images/product/product2.png"
     },
     {
         "id":4,
@@ -37,7 +37,7 @@
         "title":"product 1",
         "oldprice":200,
         "price":322,
-        "image":"./images/product/product.jpg"
+        "image":"./images/product/product2.png"
     },
     {
         "id":6,
@@ -47,13 +47,5 @@
         "price":222,
         "image":"./images/product/product.jpg"
     }
-
-
-
-
-
-
-
-
 
 ]

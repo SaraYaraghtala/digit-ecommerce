@@ -3,19 +3,19 @@
       "category": "Living",
       "subcategory": [
         {
-          "name": "Living1",
-          "subsubcategories": ["Living1-1", "Living1-2", "Living1-3"]
+          "name": "Bed linen",
+          "subsubcategories": ["Duvet cover", "Pillow", "Cushion cover", " Royal duvet cover"]
         },
         {
-          "name": "Living2",
-          "subsubcategories": ["Living2-1", "Living2-2", "Living2-3"]
+          "name": "Window decoration",
+          "subsubcategories": ["Curtain Lily", "Insect curtain", "Privacy window film", "Chambray curtain"]
         },
         {
-          "name": "Living3",
-          "subsubcategories": ["Living3-1", "Living3-2", "Living3-3"]
+          "name": "Wall decoration",
+          "subsubcategories": ["Clock", "Photo frame", "Buddha canvas","Mirror" ]
         }
       ],
-      "icon": "./images/icon/card.svg"
+      "icon": "./images/icon/living.svg"
     },
     {
       "category": "Garden",
@@ -33,14 +33,14 @@
           "subsubcategories": ["Garden3-1", "Garden3-2", "Garden3-3"]
         }
       ],
-      "icon": "./images/icon/location.svg"
+      "icon": "./images/icon/garden.svg"
     },
     {
-        "category": "Smart phone",
+        "category": "Laptops",
         "subcategory": [
           {
-            "name": "Smart phone1",
-            "subsubcategories": ["Smart phone1-1", "Smart phone1-2", "Smart phone1-3"]
+            "name": "APPLE",
+            "subsubcategories": ["MacBook 13.6", "Smart phone1-2", "Smart phone1-3"]
           },
           {
             "name": "Smart phone2",
@@ -51,6 +51,6 @@
             "subsubcategories": ["Smart phone3-1", "Smart phone3-2", "Smart phone3-3"]
           }
         ],
-        "icon": "./images/icon/card.svg"
+        "icon": "./images/icon/laptop.svg"
       }
   ]

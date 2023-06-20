@@ -1,17 +1,43 @@
-import React from 'react';
-import Product from './Product';
+import React, { useEffect, useState } from "react";
+import Product from "./Product";
 
 const Baner1 = () => {
-    return (
-        <div className="w-full  flex items-center h-32 bg-no-repeat bg-[#EEF1EF] rounded-lg bg-[url('./images/background/freshPattern.svg')]">
-            < Product  discount={10} image="./images/product/product.jpg"/>
-            < Product  discount={15}image="./images/product/product.jpg"/>
-            < Product  discount={10}image="./images/product/product.jpg"/>
-            < Product discount={20} image="./images/product/product.jpg"/>
-            < Product discount={50} image="./images/product/product.jpg"/>
-            < Product discount={80} image="./images/product/product.jpg"/>
-        </div>
-    );
+  const [BanerData, setBanerData]=useState([])
+   const getData =()=>{
+    fetch("./FakeData/BanerProduct.json")
+    .then ( response =>response.json())
+    .then (data =>setBanerData(data))
+   }
+   useEffect(
+    ()=>{getData()},
+    []
+   )
+  return (
+    <div className="w-full  flex items-center h-32 bg-no-repeat bg-[#EEF1EF] rounded-lg bg-[url('./images/background/freshPattern.svg')]">
+      <div className="flex items-center h-32 w-2/6">
+        <img className="ml-10" src="./images/background/fresh.png" alt="fresh" />
+        <h1 className="font-bold text-green-800 ">
+          Lorem ipsum dolor sit amet.
+        </h1>
+      </div>
+      
+      <div className=" w-3/6 flex">
+      {
+      BanerData&&BanerData.map(
+      (item)=>{
+        return(<Product {...item} key={item.id}/>)
+      }
+     )
+     }
+     </div>
+      <div className="w-1/6  flex">
+        <button className="bg-white  text-green-800 p-4 rounded-3xl font-bold ">
+          Show more....
+        </button>
+      </div>
+      
+    </div>
+  );
 };
 
 export default Baner1;

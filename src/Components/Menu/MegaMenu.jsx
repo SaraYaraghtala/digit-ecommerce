@@ -22,7 +22,7 @@ const MegaMenu = () => {
           className="hover:border-l-red-400 items-center hover:border-l hover:border-l-solid flex px-1"
           href="#"
         >
-          <img className="h-[70%] mr-2" src={MegaIcon} alt="" />
+          <img className="h-[70%] mr-2" src={MegaIcon} alt="all" />
           ALL
         </a>
       </div>
@@ -32,8 +32,8 @@ const MegaMenu = () => {
           menuData&& menuData.map(
             (item)=>{
               return (
-                <MegaMenuItem subcategory= {item.subcategory}  category={item.category}  icon={item.icon} key={item.category}>
-                  <img className="h-[100%]" src={item.icon} alt="card" />
+                <MegaMenuItem  subcategory= {item.subcategory}  category={item.category}  icon={item.icon} key={item.category}>
+                  <img className="h-[100%] flex items-center py-1 pr-1 " src={item.icon} alt="card" />
                     {item.category}
                 </MegaMenuItem>
               )
