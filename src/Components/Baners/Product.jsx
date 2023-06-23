@@ -7,7 +7,7 @@ const Product = ({discount ,image}) => {
                 {discount}%
 
             </span>
-            <img className='h-[80%] rounded-full absolute left-2 top-2 z-20' src={image} alt="product" />
+            <img className='h-[65%] absolute left-4 top-4 z-20' src={import.meta.env.VITE_BASE_URL+image.data.attributes.formats.thumbnail.url} alt="product" />
         </div>
     );
 };

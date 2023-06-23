@@ -3,11 +3,13 @@ import Product from "./Product";
 
 const Baner1 = () => {
   const [BanerData, setBanerData]=useState([])
-   const getData =()=>{
-    fetch("./FakeData/BanerProduct.json")
-    .then ( response =>response.json())
-    .then (data =>setBanerData(data))
-   }
+  const getData = () => {
+    fetch(import.meta.env.VITE_BASE_URL+"/api/products?populate=image&filters[showinbaner][$eq]=true",{headers: {"Authorization": "bearer "+import.meta.env.VITE_API_KEY}
+  })
+      .then((response) => response.json())
+      .then((result) => {setBanerData(result.data)
+      console.log(result.data)});
+  };
    useEffect(
     ()=>{getData()},
     []
@@ -25,7 +27,7 @@ const Baner1 = () => {
       {
       BanerData&&BanerData.map(
       (item)=>{
-        return(<Product {...item} key={item.id}/>)
+        return(<Product {...item.attributes} key={item.id}/>)
       }
      )
      }

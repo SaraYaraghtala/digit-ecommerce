@@ -3,7 +3,7 @@ import React from 'react';
 const Box = ({image,discount, oldprice, price, title}) => {
     return (
         <div className='w-48 h-64 bg-white rounded-lg p-4 m-4 relative'>
-            <img src={"http://localhost:1337"+image.data.attributes.url} alt="image" />
+            <img src={import.meta.env.VITE_BASE_URL+image.data.attributes.url} alt="image" />
             <h4>{title}</h4>
             <del className='text-gray-500'>{oldprice}$</del>
             <span className='font-bold ml-6'>{price}$</span>

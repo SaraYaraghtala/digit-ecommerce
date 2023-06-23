@@ -5,7 +5,7 @@ import Box from "./Box";
 const ProductCarousel = () => {
     const [productData, setProductData] = useState([]);
     const getData = () => {
-        fetch("http://localhost:1337/api/products?populate=image",{headers: {"Authorization": "bearer 42a362acbd86254738d33a7aff586390b820e502bd1fe1f8a420a4de3ae834c5cf807a30bae9f1909dbbdb98381aac40b19967b86c559a5a471e00841a6a356760f7850a79741fdd8a945cad6e588eed989ae4e0ee4557cec742b94074059217bc16baa8c9e7d8cc994609e4db5ed677267846070309bc12200ca15b03160eb1"}
+        fetch(import.meta.env.VITE_BASE_URL+"/api/products?populate=image&filters[showincarousel][$eq]=true",{headers: {"Authorization": "bearer "+import.meta.env.VITE_API_KEY}
       })
           .then((response) => response.json())
           .then((result) => {setProductData(result.data)
