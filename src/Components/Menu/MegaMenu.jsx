@@ -5,10 +5,17 @@ import MegaMenuItem from "./MegaMenuItem";
 
 const MegaMenu = () => {
   const [menuData,setMenudata]= useState([])
-  const getData =() =>{   
-    fetch("./FakeData/MegaMenu.json")
+    const getData = () => {
+      fetch(
+        import.meta.env.VITE_BASE_URL +
+          "/api/categories?populate=*",
+        { headers: { Authorization: "bearer " + import.meta.env.VITE_API_KEY } }
+      )
     .then(response => response.json())
-    .then(data =>setMenudata(data))
+    .then(result =>{setMenudata(result.data)
+      console.log(result.data)
+    })
+       
     }
     
   useEffect(

@@ -9,7 +9,7 @@ const ProductCarousel = () => {
       })
           .then((response) => response.json())
           .then((result) => {setProductData(result.data)
-          console.log(result.data)});
+         });
       };
     
       useEffect(() => {
