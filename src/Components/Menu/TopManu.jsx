@@ -27,7 +27,9 @@ const TopManu = () => {
             <Link to={`about`} className='flex items-center h-8 pr-4 '>
                 About
             </Link>
-            
+            <Link to={`checkout`} className='flex items-center h-8 pr-4 '>
+                CheckOut
+            </Link>
         </div>
     );
 };
