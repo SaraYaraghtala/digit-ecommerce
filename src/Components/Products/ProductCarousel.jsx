@@ -37,7 +37,7 @@ const ProductCarousel = () => {
         <div className="flex space-x-4 overflow-hidden"> 
          {productData&&productData.map((item) => (
           <div className="relative" id={`slide${item.id}`} key={item.id}>
-            <Box {...item.attributes} />
+            <Box {...item.attributes}  id={item.id}/>
           </div>
         ))}
         </div>

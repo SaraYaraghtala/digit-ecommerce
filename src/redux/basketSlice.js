@@ -13,6 +13,7 @@ export const basketSlice = createSlice({
       state.items.push(action.payload);
     },
     removeFromBasket: (state, action) => {
+      console.log(action.payload)
       state.items = state.items.filter(item => item.id !== action.payload.id);
     },
   },
