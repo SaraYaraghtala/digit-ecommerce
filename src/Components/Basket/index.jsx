@@ -8,6 +8,7 @@ const Basket = () => {
     const dispatch = useDispatch();
 
     return (
+        <div className="px-12" >
         <div className="overflow-x-auto">
             <table className="w-full table-auto">
                 <thead>
@@ -27,7 +28,7 @@ const Basket = () => {
                 <tbody>
                     {basketItems.map((product, index) => (
                         <tr key={index} className={`${index !== 0 ? 'border-t' : ''}`}>
-                            <td>
+                            <td className="w-x/12">
                                 <label>
                                     <input type="checkbox" className="checkbox" />
                                 </label>
@@ -49,6 +50,7 @@ const Basket = () => {
                     ))}
                 </tbody>
             </table>
+        </div>
         </div>
     );
 };
