@@ -3,13 +3,103 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { removeFromBasket } from "../../redux/basketSlice";
 import { addToBasket } from "../../redux/basketSlice";
+import { useForm } from "react-hook-form";
 
 const Basket = () => {
   const basketItems = useSelector((state) => state.basket.items);
   const dispatch = useDispatch();
-  const calculateTotalQuantity = (productId, basketItems) => {
-    const productItem = basketItems.find((item) => item.id === productId);
-    return productItem ? productItem.quantity : 0;
+  // const calculateTotalQuantity = (productId, basketItems) => {
+  //   const productItem = basketItems.find((item) => item.id === productId);
+  //   return productItem ? productItem.quantity : 0;
+  // };
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    const orderId = await addOrder(data);
+    if (orderId > -1) {
+      for (let i = 0; i < basketItems.length; i++) {
+        const item = basketItems[i];
+        addOrderItem(item, orderId);
+      }
+    }else console.log("orderId:"+orderId)
+  };
+
+  const addOrder = async (data) => {
+    try {
+      const formData = {
+        data: {
+          email: data.email,
+          address: data.address,
+          totalprice: data.totalprice,
+          username: data.username,
+        },
+      };
+
+      const response = await fetch(
+        import.meta.env.VITE_BASE_URL + "/api/orders",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "bearer " + import.meta.env.VITE_API_KEY,
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        return result.data.id;
+      } else {
+        return -1;
+      }
+    } catch (error) {
+      return -1;
+    }
+  };
+
+  const addOrderItem = async (data, orderId) => {
+    try {
+      const formData = {
+        data: {
+          title: data.title,
+          discount: data.discount,
+          price: data.price,
+          count: data.count,
+          order: orderId,
+        },
+      };
+
+      console.log(formData);
+
+      const response = await fetch(
+        import.meta.env.VITE_BASE_URL + "/api/order-items",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "bearer " + import.meta.env.VITE_API_KEY,
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Data successfully posted to Strapi:", result);
+      } else {
+        console.error("Error posting data to Strapi:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error posting data to Strapi:", error);
+    }
   };
 
   return (
@@ -76,6 +166,51 @@ const Basket = () => {
               ))}
           </tbody>
         </table>
+      </div>
+      <div className="px-12 mt-8 border rounded-md shadow-md">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex mb-4">
+            <div className="w-1/2 mr-2">
+              <input
+                {...register("email")}
+                type="email"
+                placeholder="Email"
+                className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+              />
+            </div>
+            <div className="w-1/2 ml-2">
+              <input
+                {...register("address")}
+                type="text"
+                placeholder="Address"
+                className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+              />
+            </div>
+          </div>
+          <div className="flex mb-4">
+            <div className="w-1/2 mr-2">
+              <input
+                {...register("username")}
+                type="text"
+                placeholder="Username"
+                className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+              />
+            </div>
+            <div className="w-1/2 ml-2">
+              <input
+                {...register("totalprice")}
+                type="number"
+                placeholder="Total Price"
+                className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+              />
+            </div>
+          </div>
+          <input
+            type="submit"
+            className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+            value="Save"
+          />
+        </form>
       </div>
     </div>
   );
