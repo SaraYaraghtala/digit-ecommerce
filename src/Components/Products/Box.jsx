@@ -33,19 +33,19 @@ const Box = (props) => {
       {quantity > 0 ? (
         <div className="flex items-center justify-center mt-2  p-2  ">
           <button
-            className="btn btn-sm btn-error ml-0"
-            onClick={() => dispatch(addToBasket(props))}
+            className="flex items-center justify-center btn btn-sm btn-error ml-0"
+            onClick={() => dispatch(removeFromBasket(props))}
           >
-            +
+            -
           </button>
           <span className="text-sm bg-red-600 text-black mx-2 px-2 py-1 rounded flex items-center ">
             {quantity}
           </span>
           <button
-            className="btn btn-sm btn-error ml-0"
-            onClick={() => dispatch(removeFromBasket(props))}
+            className="flex items-center justify-center btn btn-sm btn-error ml-0"
+            onClick={() => dispatch(addToBasket(props))}
           >
-            _
+            +
           </button>
         </div>
       ) : (

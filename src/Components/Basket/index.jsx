@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { removeFromBasket } from "../../redux/basketSlice";
-import { addToBasket } from "../../redux/basketSlice";
+import { addToBasket ,clearBasket,removeFromBasket } from "../../redux/basketSlice";
 import { useForm } from "react-hook-form";
 
 const Basket = () => {
   const basketItems = useSelector((state) => state.basket.items);
   const dispatch = useDispatch();
-  // const calculateTotalQuantity = (productId, basketItems) => {
-  //   const productItem = basketItems.find((item) => item.id === productId);
-  //   return productItem ? productItem.quantity : 0;
-  // };
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [orderId, setOrderId] = useState(0);
+
+  const calculateTotalPrice = () => {
+    let total = 0;
+    for (let item of basketItems) {
+      total = total + item.price * item.count;
+    }
+    setTotalPrice(total);
+  };
+
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [basketItems]);
 
   const {
     register,
@@ -24,9 +33,10 @@ const Basket = () => {
     if (orderId > -1) {
       for (let i = 0; i < basketItems.length; i++) {
         const item = basketItems[i];
-        addOrderItem(item, orderId);
+        await addOrderItem(item, orderId);
       }
-    }else console.log("orderId:"+orderId)
+      dispatch(clearBasket())
+    } else console.log("orderId:" + orderId);
   };
 
   const addOrder = async (data) => {
@@ -35,7 +45,7 @@ const Basket = () => {
         data: {
           email: data.email,
           address: data.address,
-          totalprice: data.totalprice,
+          totalprice: totalPrice,
           username: data.username,
         },
       };
@@ -55,6 +65,7 @@ const Basket = () => {
 
       if (response.ok) {
         const result = await response.json();
+        setOrderId(result.data.id);
         return result.data.id;
       } else {
         return -1;
@@ -104,114 +115,126 @@ const Basket = () => {
 
   return (
     <div className="px-12 mt-4">
-      <div className="overflow-x-auto border rounded-lg border-gray-300 p-4">
-        <table className="w-full table-auto">
-          <thead>
-            <tr>
-              <th className="w-1/12">
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <th className="w-3/12">Title</th>
-              <th className="w-2/12">Image</th>
-              <th className="w-2/12">Discount</th>
-              <th className="w-2/12">Price</th>
-              <th className="w-2/12">Delete item </th>
-            </tr>
-          </thead>
-          <tbody>
-            {[...basketItems]
-              .sort((a, b) => b.discount - a.discount)
-              .map((product, index) => (
-                <tr key={index} className={`${index !== 0 ? "border-t" : ""}`}>
-                  <td className="w-1/12">
-                    <label>
-                      <input type="checkbox" className="checkbox" />
-                    </label>
-                  </td>
-                  <td className="w-3/12">{product.title}</td>
-                  <td>
-                    <img
-                      src={
-                        import.meta.env.VITE_BASE_URL +
-                        product.image.data.attributes.url
-                      }
-                      alt="Product"
-                      className="w-2/12 h-12 mask mask-squircle"
-                    />
-                  </td>
-                  <td className="w-2/12">{product.discount}</td>
-                  <td className="w-2/12">{product.price}</td>
-                  <td className="w-2/12">
-                    <div className="flex items-center justify-center mt-2 p-2">
-                      <button
-                        className="btn btn-sm btn-error ml-0"
-                        onClick={() => dispatch(addToBasket(product))}
-                      >
-                        +
-                      </button>
-                      <span className="text-sm bg-red-600 text-black mx-2 px-2 py-1 rounded flex items-center">
-                        {product.count}
-                      </span>
-                      <button
-                        className="btn btn-sm btn-error ml-0"
-                        onClick={() => dispatch(removeFromBasket(product))}
-                      >
-                        -
-                      </button>
-                    </div>
-                  </td>
+      {orderId === 0 ? (
+        <div>
+          <div className="overflow-x-auto border rounded-lg border-gray-300 p-4">
+            <table className="w-full table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Image</th>
+                  <th>Discount</th>
+                  <th>Fee</th>
+                  <th>Price</th>
+                  <th>Count</th>
                 </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="px-12 mt-8 border rounded-md shadow-md">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex mb-4">
-            <div className="w-1/2 mr-2">
-              <input
-                {...register("email")}
-                type="email"
-                placeholder="Email"
-                className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
-              />
-            </div>
-            <div className="w-1/2 ml-2">
-              <input
-                {...register("address")}
-                type="text"
-                placeholder="Address"
-                className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
-              />
+              </thead>
+              <tbody>
+                {[...basketItems]
+                  .sort((a, b) => b.discount - a.discount)
+                  .map((product, index) => (
+                    <tr
+                      key={index}
+                      className={`${index !== 0 ? "border-t" : ""}`}
+                    >
+                      <td className="w-3/12">{product.title}</td>
+                      <td>
+                        <img
+                          src={
+                            import.meta.env.VITE_BASE_URL +
+                            product.image.data.attributes.url
+                          }
+                          alt="Product"
+                          className="w-12 h-12 mask mask-squircle"
+                        />
+                      </td>
+                      <td>{product.discount}</td>
+                      <td>{product.price}</td>
+                      <td>{product.price * product.count}</td>
+                      <td>
+                        <div className="flex mt-2 p-2">
+                          <button
+                            className="btn btn-sm btn-error ml-0"
+                            onClick={() => dispatch(removeFromBasket(product))}
+                          >
+                            -
+                          </button>
+                          <span className="text-sm bg-red-600 text-black mx-2 px-2  rounded-md flex items-center">
+                            {product.count}
+                          </span>
+                          <button
+                            className="btn btn-sm btn-error ml-0"
+                            onClick={() => dispatch(addToBasket(product))}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+            <div>
+              {" "}
+              <h1> Total price :{totalPrice}</h1>
             </div>
           </div>
-          <div className="flex mb-4">
-            <div className="w-1/2 mr-2">
+          <div className="px-12 mt-8 border rounded-md shadow-md">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="flex mb-4">
+                <div className="w-1/2 mr-2">
+                  <input
+                    {...register("email")}
+                    type="email"
+                    placeholder="Email"
+                    className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+                <div className="w-1/2 ml-2">
+                  <input
+                    {...register("address")}
+                    type="text"
+                    placeholder="Address"
+                    className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+              </div>
+              <div className="flex mb-4">
+                <div className="w-1/2 mr-2">
+                  <input
+                    {...register("username")}
+                    type="text"
+                    placeholder="Username"
+                    className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+              </div>
               <input
-                {...register("username")}
-                type="text"
-                placeholder="Username"
-                className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+                type="submit"
+                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+                value="Check Out"
               />
-            </div>
-            <div className="w-1/2 ml-2">
-              <input
-                {...register("totalprice")}
-                type="number"
-                placeholder="Total Price"
-                className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
-              />
-            </div>
+            </form>
           </div>
-          <input
-            type="submit"
-            className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
-            value="Save"
-          />
-        </form>
-      </div>
+        </div>
+      ) : (
+        <div className="alert alert-success">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="stroke-current shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span> Successfully Checkout your orderId is {orderId}</span>
+        </div>
+      )}
     </div>
   );
 };
