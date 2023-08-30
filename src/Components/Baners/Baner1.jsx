@@ -8,7 +8,7 @@ const Baner1 = () => {
   })
       .then((response) => response.json())
       .then((result) => {setBanerData(result.data)
-      console.log(result.data)});
+      });
   };
    useEffect(
     ()=>{getData()},

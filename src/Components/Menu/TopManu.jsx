@@ -27,7 +27,7 @@ const TopManu = () => {
             <Link to={`about`} className='flex items-center h-8 pr-4 '>
                 About
             </Link>
-            
+           
         </div>
     );
 };

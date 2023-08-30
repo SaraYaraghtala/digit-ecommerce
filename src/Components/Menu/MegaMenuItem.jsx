@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MegaMenuItem = ({ children, subcategory }) => {
   const [showPanel, setShowPanel] = useState(false);
@@ -12,15 +13,17 @@ const MegaMenuItem = ({ children, subcategory }) => {
         <div className="absolute pl-1 left-44 top-0 h-full w-[86%]  bg-pink-50">
           {subcategory &&
             subcategory.map((subItem) => (
-              <div key={subItem.name}>
-                <div className="font-bold">{subItem.name}</div>
-                {subItem.subsubcategories && (
+              <div key={subItem.id}>
+                <div className="font-bold">
+                  < Link to={"products/"+subItem.id} > {subItem.title}</Link>
+                </div>
+                {subItem.subCategory && (
                   <ul className="pl-2 ">
-                    {subItem.subsubcategories.map((subSubItem) => (
-                      <li key={subSubItem}>
-                        <a href="#" className="py-2">
-                          {subSubItem}
-                        </a>
+                    {subItem.subCategory.map((subSubItem) => (
+                      <li key={subSubItem.id}>
+                        <Link to={"products/"+subSubItem.id} className="py-2">
+                          {subSubItem.title}
+                        </Link>
                       </li>
                     ))}
                   </ul>

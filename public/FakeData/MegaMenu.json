@@ -21,8 +21,8 @@
       "category": "Garden",
       "subcategory": [
         {
-          "name": "Garden1",
-          "subsubcategories": ["Garden1-1", "Garden1-2", "Garden1-3"]
+          "name": "Flower pots",
+          "subsubcategories": ["Flowerpot Dijon", "Garden1-2", "Garden1-3"]
         },
         {
           "name": "Garden2",
